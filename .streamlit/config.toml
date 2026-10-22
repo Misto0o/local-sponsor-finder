@@ -1,0 +1,7 @@
+[theme]
+base = "light"
+primaryColor = "#7c4dff"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f3efff"
+baseRadius = "large"
+buttonRadius = "full"

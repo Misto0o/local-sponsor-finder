@@ -1,0 +1,63 @@
+{
+  "release": "2026-09-23.1",
+  "center": [
+    35.98153,
+    -79.99122
+  ],
+  "radius_miles": 60.0,
+  "min_confidence": 0.7,
+  "funnel": [
+    {
+      "step": "All places in the NC+SC extract",
+      "count": 1335335
+    },
+    {
+      "step": "Within 60 miles of the school",
+      "count": 153428
+    },
+    {
+      "step": "... and not closed",
+      "count": 149538
+    },
+    {
+      "step": "... and confidence >= 0.7",
+      "count": 119231
+    },
+    {
+      "step": "... and a sponsor-plausible category",
+      "count": 95913
+    },
+    {
+      "step": "... and not a national chain",
+      "count": 78219
+    },
+    {
+      "step": "... and has a phone number",
+      "count": 71285
+    },
+    {
+      "step": "... and has phone AND website",
+      "count": 59417
+    }
+  ],
+  "pool_by_bucket": {
+    "health": 9887,
+    "retail": 8600,
+    "personal_care_fitness": 7406,
+    "other": 6909,
+    "food_drink": 6750,
+    "home_trades": 5975,
+    "auto": 5553,
+    "lodging_recreation": 3539,
+    "financial": 2845,
+    "business_services": 2775,
+    "real_estate": 2367,
+    "manufacturing": 1808,
+    "pets_animals": 1430,
+    "logistics": 1319,
+    "education_childcare": 1225,
+    "legal": 1180,
+    "agriculture": 916,
+    "tech_telecom": 801
+  }
+}

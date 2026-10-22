@@ -1,0 +1,287 @@
+{
+  "school": "Kearns Academy",
+  "matched_address": "1710 MCGUINN DR, HIGH POINT, NC, 27265",
+  "lat": 35.981532705766,
+  "lon": -79.991220410981,
+  "radius_miles": 60.0,
+  "release": "2026-09-23.1",
+  "category_field_used": "taxonomy.primary",
+  "all_places": {
+    "total": 154920,
+    "phone": 137857,
+    "phone_pct": 89.0,
+    "website": 122910,
+    "website_pct": 79.3,
+    "email": 57749,
+    "email_pct": 37.3,
+    "phone_and_website": 115294,
+    "phone_and_website_pct": 74.4,
+    "phone_or_website": 145473,
+    "phone_or_website_pct": 93.9,
+    "brand_tagged": 89967,
+    "brand_tagged_pct": 58.1
+  },
+  "not_closed": {
+    "total": 151004,
+    "phone": 134960,
+    "phone_pct": 89.4,
+    "website": 120850,
+    "website_pct": 80.0,
+    "email": 57730,
+    "email_pct": 38.2,
+    "phone_and_website": 113527,
+    "phone_and_website_pct": 75.2,
+    "phone_or_website": 142283,
+    "phone_or_website_pct": 94.2,
+    "brand_tagged": 89946,
+    "brand_tagged_pct": 59.6
+  },
+  "closed_or_not_open": 3916,
+  "not_closed_conf_ge_0.5": {
+    "total": 137208,
+    "phone": 123262,
+    "phone_pct": 89.8,
+    "website": 111515,
+    "website_pct": 81.3,
+    "email": 48589,
+    "email_pct": 35.4,
+    "phone_and_website": 105221,
+    "phone_and_website_pct": 76.7,
+    "phone_or_website": 129556,
+    "phone_or_website_pct": 94.4,
+    "brand_tagged": 76532,
+    "brand_tagged_pct": 55.8
+  },
+  "confidence_buckets": {
+    "0-0.5": 13883,
+    "0.5-0.7": 18851,
+    "0.7-0.9": 25417,
+    "0.9-1.01": 96769
+  },
+  "null_category": 5099,
+  "distinct_categories": 1518,
+  "top_categories": [
+    {
+      "category": "(none)",
+      "count": 5095,
+      "phone_pct": 93.1,
+      "website_pct": 92.0,
+      "brand_pct": 20.2
+    },
+    {
+      "category": "christian_place_of_worship",
+      "count": 4801,
+      "phone_pct": 89.0,
+      "website_pct": 72.1,
+      "brand_pct": 91.9
+    },
+    {
+      "category": "doctors_office",
+      "count": 2637,
+      "phone_pct": 99.2,
+      "website_pct": 95.7,
+      "brand_pct": 12.8
+    },
+    {
+      "category": "real_estate_agent",
+      "count": 2595,
+      "phone_pct": 97.9,
+      "website_pct": 88.1,
+      "brand_pct": 66.6
+    },
+    {
+      "category": "health_care",
+      "count": 2098,
+      "phone_pct": 28.6,
+      "website_pct": 38.2,
+      "brand_pct": 8.8
+    },
+    {
+      "category": "automotive_repair",
+      "count": 2097,
+      "phone_pct": 94.5,
+      "website_pct": 60.1,
+      "brand_pct": 76.3
+    },
+    {
+      "category": "baptist_place_of_worship",
+      "count": 1970,
+      "phone_pct": 93.9,
+      "website_pct": 78.4,
+      "brand_pct": 97.3
+    },
+    {
+      "category": "social_or_community_service",
+      "count": 1892,
+      "phone_pct": 83.2,
+      "website_pct": 82.5,
+      "brand_pct": 94.0
+    },
+    {
+      "category": "beauty_salon",
+      "count": 1877,
+      "phone_pct": 93.1,
+      "website_pct": 61.2,
+      "brand_pct": 92.7
+    },
+    {
+      "category": "hair_salon",
+      "count": 1862,
+      "phone_pct": 96.6,
+      "website_pct": 71.3,
+      "brand_pct": 73.6
+    },
+    {
+      "category": "insurance_agency",
+      "count": 1667,
+      "phone_pct": 77.3,
+      "website_pct": 78.5,
+      "brand_pct": 50.6
+    },
+    {
+      "category": "gas_station",
+      "count": 1664,
+      "phone_pct": 83.0,
+      "website_pct": 87.1,
+      "brand_pct": 63.9
+    },
+    {
+      "category": "historic_site",
+      "count": 1594,
+      "phone_pct": 72.2,
+      "website_pct": 64.1,
+      "brand_pct": 99.4
+    },
+    {
+      "category": "atm",
+      "count": 1572,
+      "phone_pct": 80.8,
+      "website_pct": 88.6,
+      "brand_pct": 22.7
+    },
+    {
+      "category": "real_estate_service",
+      "count": 1475,
+      "phone_pct": 64.9,
+      "website_pct": 73.6,
+      "brand_pct": 53.1
+    },
+    {
+      "category": "farm",
+      "count": 1427,
+      "phone_pct": 81.7,
+      "website_pct": 52.3,
+      "brand_pct": 97.8
+    },
+    {
+      "category": "contractor",
+      "count": 1382,
+      "phone_pct": 96.2,
+      "website_pct": 80.0,
+      "brand_pct": 57.0
+    },
+    {
+      "category": "money_transfer_service",
+      "count": 1286,
+      "phone_pct": 66.7,
+      "website_pct": 99.9,
+      "brand_pct": 33.3
+    },
+    {
+      "category": "professional_service",
+      "count": 1254,
+      "phone_pct": 93.6,
+      "website_pct": 77.6,
+      "brand_pct": 84.8
+    },
+    {
+      "category": "convenience_store",
+      "count": 1204,
+      "phone_pct": 94.6,
+      "website_pct": 74.6,
+      "brand_pct": 58.4
+    },
+    {
+      "category": "auto_dealer",
+      "count": 1178,
+      "phone_pct": 96.3,
+      "website_pct": 75.0,
+      "brand_pct": 85.8
+    },
+    {
+      "category": "restaurant",
+      "count": 1116,
+      "phone_pct": 57.4,
+      "website_pct": 53.5,
+      "brand_pct": 27.9
+    },
+    {
+      "category": "fast_food_restaurant",
+      "count": 1071,
+      "phone_pct": 90.7,
+      "website_pct": 94.1,
+      "brand_pct": 81.1
+    },
+    {
+      "category": "park",
+      "count": 1064,
+      "phone_pct": 53.6,
+      "website_pct": 54.0,
+      "brand_pct": 93.3
+    },
+    {
+      "category": "grocery_store",
+      "count": 983,
+      "phone_pct": 88.4,
+      "website_pct": 68.8,
+      "brand_pct": 77.6
+    },
+    {
+      "category": "furniture_store",
+      "count": 940,
+      "phone_pct": 95.6,
+      "website_pct": 78.2,
+      "brand_pct": 70.4
+    },
+    {
+      "category": "discount_store",
+      "count": 939,
+      "phone_pct": 94.4,
+      "website_pct": 88.2,
+      "brand_pct": 83.8
+    },
+    {
+      "category": "financial_service",
+      "count": 935,
+      "phone_pct": 67.4,
+      "website_pct": 83.5,
+      "brand_pct": 31.0
+    },
+    {
+      "category": "religious_organization",
+      "count": 933,
+      "phone_pct": 76.4,
+      "website_pct": 59.7,
+      "brand_pct": 93.7
+    },
+    {
+      "category": "nail_salon",
+      "count": 900,
+      "phone_pct": 97.7,
+      "website_pct": 77.4,
+      "brand_pct": 85.7
+    }
+  ],
+  "sources_in_bbox": {
+    "Overture": 237033,
+    "Overture-signals": 143786,
+    "meta": 126837,
+    "BrightQuery": 53720,
+    "Microsoft": 38875,
+    "Foursquare": 12913,
+    "AllThePlaces": 3446,
+    "DAC": 1012,
+    "PinMeTo": 203,
+    "RenderSEO": 27
+  }
+}
