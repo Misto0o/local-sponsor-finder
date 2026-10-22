@@ -13,10 +13,24 @@ from pathlib import Path
 import duckdb
 import pandas as pd
 
+import livepull
+
 from config import (BUCKET_FIT, BUCKET_LABELS, BUCKET_NOTES, BUSINESS_WORDS_PATTERN, INDIVIDUAL_CATEGORIES,
                     INDIVIDUAL_NAME_PATTERN, classify)
 
-DATA_PATH = Path(os.environ.get("SPONSOR_DATA", Path(__file__).parent / "data" / "places.parquet"))
+def _default_data_path():
+    """SPONSOR_DATA wins; then the full local file; then the small demo file that ships with the repo."""
+    env = os.environ.get("SPONSOR_DATA")
+    if env:
+        return Path(env)
+    d = Path(__file__).parent / "data"
+    for name in ("places.parquet", "places_demo.parquet"):
+        if (d / name).exists():
+            return d / name
+    return d / "places.parquet"
+
+
+DATA_PATH = _default_data_path()
 KEARNS = (35.98153, -79.99122)
 KEARNS_ADDRESS = "1710 McGuinn Drive, High Point, NC 27265"
 EARTH_RADIUS_MILES = 3958.8
@@ -41,23 +55,52 @@ def geocode(address):
     return c["y"], c["x"], matches[0].get("matchedAddress", address)
 
 
+def _miles_between(a_lat, a_lon, b_lat, b_lon):
+    p = math.radians
+    h = math.sin(p(b_lat - a_lat) / 2) ** 2 + math.cos(p(a_lat)) * math.cos(p(b_lat)) * math.sin(p(b_lon - a_lon) / 2) ** 2
+    return 2 * EARTH_RADIUS_MILES * math.asin(math.sqrt(h))
+
+
+def _local_covers(path, lat, lon, radius_miles):
+    """Does the local file contain the whole search circle? If unsure, trust it (the old behavior)."""
+    try:
+        side = path.with_name(path.stem + ".coverage.json")
+        if side.exists():  # the small demo file lists the circles it was cut from
+            circles = json.loads(side.read_text())["circles"]
+            return any(_miles_between(lat, lon, c["lat"], c["lon"]) + radius_miles <= c["radius_miles"] for c in circles)
+        mn_la, mx_la, mn_lo, mx_lo = duckdb.connect().execute(
+            f"SELECT min(lat), max(lat), min(lon), max(lon) FROM read_parquet('{path.as_posix()}')").fetchone()
+        dlat = radius_miles / 69.0
+        dlon = dlat / math.cos(math.radians(lat))
+        return lat - dlat >= mn_la and lat + dlat <= mx_la and lon - dlon >= mn_lo and lon + dlon <= mx_lo
+    except Exception:
+        return True
+
+
 def load_nearby(lat, lon, radius_miles, data_path=None):
-    """All places (including excluded ones) within the radius, with a `miles` column."""
+    """All places (including excluded ones) within the radius, with a `miles` column.
+    Uses the local data file when it covers this school; otherwise pulls live from Overture Maps."""
     path = Path(data_path or DATA_PATH)
-    if not path.exists():
-        raise FileNotFoundError(f"{path} not found. Run prepare_data.py first.")
-    dlat = radius_miles / 69.0
-    dlon = dlat / math.cos(math.radians(lat))
-    q = f"""
-        SELECT * FROM (
-            SELECT *, {EARTH_RADIUS_MILES} * 2 * asin(sqrt(
-                pow(sin(radians(lat - {lat}) / 2), 2)
-                + cos(radians({lat})) * cos(radians(lat)) * pow(sin(radians(lon - {lon}) / 2), 2))) AS miles
-            FROM read_parquet('{path.as_posix()}')
-            WHERE lat BETWEEN {lat - dlat} AND {lat + dlat} AND lon BETWEEN {lon - dlon} AND {lon + dlon}
-        ) WHERE miles <= {radius_miles}
-    """
-    df = duckdb.connect().execute(q).df()
+    if path.exists() and _local_covers(path, lat, lon, radius_miles):
+        dlat = radius_miles / 69.0
+        dlon = dlat / math.cos(math.radians(lat))
+        q = f"""
+            SELECT * FROM (
+                SELECT *, {EARTH_RADIUS_MILES} * 2 * asin(sqrt(
+                    pow(sin(radians(lat - {lat}) / 2), 2)
+                    + cos(radians({lat})) * cos(radians(lat)) * pow(sin(radians(lon - {lon}) / 2), 2))) AS miles
+                FROM read_parquet('{path.as_posix()}')
+                WHERE lat BETWEEN {lat - dlat} AND {lat + dlat} AND lon BETWEEN {lon - dlon} AND {lon + dlon}
+            ) WHERE miles <= {radius_miles}
+        """
+        df = duckdb.connect().execute(q).df()
+    else:
+        try:
+            df = livepull.pull(lat, lon, radius_miles)
+        except Exception as e:
+            raise FileNotFoundError(
+                f"Couldn't pull live data from Overture Maps for this address ({e}). "
+                "Try again in a minute, or use the Kearns Academy demo.")
     # Re-apply config.py rules at load time, so editing config.py takes effect without re-running prepare_data.py
     cmap = {c: classify(c) for c in df.category.dropna().unique()}
     cmap[None] = classify(None)

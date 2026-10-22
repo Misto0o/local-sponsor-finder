@@ -12,7 +12,7 @@ EXPORT_ROWS = 2000
 
 
 @st.cache_data(show_spinner="Loading nearby businesses...")
-def nearby(lat, lon, cfg_version):
+def nearby(lat, lon, cfg_version, max_entries=3):
     # Always load the max radius once per school; the slider just filters it in memory (fast)
     return finder.load_nearby(lat, lon, MAX_RADIUS)
 
